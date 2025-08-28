@@ -1,22 +1,14 @@
+// keystatic.config.ts
 import { config, collection, fields, singleton } from '@keystatic/core';
-import { github } from '@keystatic/core/storage/github';
-
-const repo = process.env.KEYSTATIC_GITHUB_REPO!;     // e.g. "owner/repo"
-const branch = process.env.KEYSTATIC_GITHUB_BRANCH || 'main';
 
 export default config({
-  storage: github({
-    repo,
-    branch,
-    auth: {
-      clientId: process.env.KEYSTATIC_GITHUB_CLIENT_ID!,
-      clientSecret: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET!
-    }
-  }),
-
-  ui: {
-    brand: { name: 'Astro + Keystatic' }
+  storage: { kind: 'cloud' },
+  cloud: {
+    // This comes from Keystatic Cloud → your project page
+    project: 'TEAM_NAME/PROJECT_NAME'
   },
+
+  ui: { brand: { name: 'Astro + Keystatic' } },
 
   singletons: {
     site: singleton({
