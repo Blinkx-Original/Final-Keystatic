@@ -1,0 +1,26 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+const postsDir = path.join(Astro.root.pathname, 'content', 'posts');
+const posts = fs.existsSync(postsDir)
+  ? fs.readdirSync(postsDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
+  : [];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Astro + Keystatic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <h1>Astro + Keystatic</h1>
+    <p>Admin UI: <a href="/keystatic">/keystatic</a></p>
+
+    <h2>Posts</h2>
+    <ul>
+      {posts.map(p => <li>{p}</li>)}
+    </ul>
+  </body>
+</html>
